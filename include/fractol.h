@@ -48,4 +48,27 @@ typedef struct s_image
 	int		endian;
 }	t_image;
 
+typedef struct s_complex
+{
+	double	r;
+	double	i;
+} t_complex;
+
+typedef struct	s_viewport
+{
+	double	xmin;
+	double	xmax;
+	double	ymin;
+	double	ymax;
+	double	zoom;
+	double	offx;
+	double	offy;
+	long	max;
+	t_complex	mouse;
+}	t_viewport;
+
+typedef struct s_mlx t_mlx;
+
+void draw_screen(t_mlx *mlx, void *mlx_win);
+
 #endif

@@ -19,7 +19,8 @@ INCDIR = ./include
 OBJDIR = ./obj
 
 # src
-SRC 	= main.c \
+SRC 	= image.c \
+			main.c \
 		  $(addprefix fractals/,$(shell ls $(SRCDIR)/fractals | grep -E ".+\.c"))
 
 OBJ		= $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
