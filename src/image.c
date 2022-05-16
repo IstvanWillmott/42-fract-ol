@@ -43,7 +43,7 @@ void draw_screen(t_mlx *mlx, void *mlx_win)
 			if (ret == 50)
 				pixel_draw(&image, x, y, 0x00000000);
 			else
-				pixel_draw(&image, x, y, 0x00FFFFFF);
+				pixel_draw(&image, x, y, 0x00FFFFFF * ret);
 			//printf("%d, %d rets: %d\n", x, y, ret);
 			y++;
 		}

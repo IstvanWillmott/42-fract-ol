@@ -17,9 +17,9 @@
 # include <pthread.h>
 # include <math.h>
 
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
-# define ZOOM 1.1f
+# define WIN_WIDTH 2560
+# define WIN_HEIGHT 1440
+# define ZOOM 0
 # define THREADS 8
 
 typedef struct	s_rgba
