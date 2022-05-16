@@ -70,5 +70,6 @@ typedef struct	s_viewport
 typedef struct s_mlx t_mlx;
 
 void draw_screen(t_mlx *mlx, void *mlx_win);
+int	mandelbrot(int x, int y);
 
 #endif
