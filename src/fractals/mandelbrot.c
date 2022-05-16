@@ -16,8 +16,9 @@
 t_complex xyto_complex(int x, int y)
 {
 	t_complex	p;
-	p.r = (double)x / (WIN_WIDTH * 0.3) - 2;
-	p.i = (double)y / (WIN_HEIGHT * 0.45) - 1;
+
+	p.r = (double)x / (WIN_WIDTH * 0.26) - 2;
+	p.i = (double)y / (WIN_HEIGHT * 0.45) - 1.1;
 	/*
 	p.r = (((double)x / WIN_WIDTH) * (v->xmax - v->xmin)) * v->zoom
 		+ v->xmin + v->offx;
@@ -26,8 +27,6 @@ t_complex xyto_complex(int x, int y)
 	*/
 	return (p);
 }
-
-#include <stdlib.h>
 
 int mandelbrot(int x, int y)
 {
@@ -38,14 +37,7 @@ int mandelbrot(int x, int y)
 	int max_iteration;
 	int i;
 
-	max_iteration = 50;
-	//v.xmin = -2.0f;
-	//v.xmax = 1.0f;
-	//v.ymin = -1.0f;
-	//v.ymax = 1.0f;
-	//v.offx = -0.5f;
-	//v.offy = 0.5f;
-	//v.zoom = 0;
+	max_iteration = 2000;
 	i = 0;
 	z = xyto_complex(x, y);
 	c = xyto_complex(x, y);
