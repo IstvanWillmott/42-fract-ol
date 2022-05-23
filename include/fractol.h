@@ -16,6 +16,7 @@
 # include <stdint.h>
 # include <pthread.h>
 # include <math.h>
+# include <stdlib.h>
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
@@ -48,6 +49,13 @@ typedef struct s_image
 	int		endian;
 }	t_image;
 
+typedef struct s_imagewin
+{
+	void	*mlx;
+	void	*win;
+	t_image image;
+}	t_imagewin;
+
 typedef struct s_complex
 {
 	double	r;
@@ -67,9 +75,12 @@ typedef struct	s_viewport
 	t_complex	mouse;
 }	t_viewport;
 
-typedef struct s_mlx t_mlx;
 
-void draw_screen(t_mlx *mlx, void *mlx_win);
-int	mandelbrot(int x, int y);
+//typedef struct s_mlx t_mlx;
+
+void 		draw_screen(t_imagewin *imagewin);
+int			mandelbrot(int x, int y);
+t_complex	xyto_complex(int x, int y);
+int 		mouse_hook_init(int keycode, int x, int y, t_mouse *mouse);
 
 #endif

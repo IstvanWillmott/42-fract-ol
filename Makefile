@@ -21,6 +21,7 @@ OBJDIR = ./obj
 # src
 SRC 	= image.c \
 			main.c \
+			zoom.c \
 		  $(addprefix fractals/,$(shell ls $(SRCDIR)/fractals | grep -E ".+\.c"))
 
 OBJ		= $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
@@ -38,6 +39,7 @@ MLX_LIB	= $(addprefix $(MLX),mlx.a)
 
 # build instructions
 all: obj $(MLX_LIB) $(NAME)
+	./$(NAME)
 
 obj:
 	mkdir -p $(OBJDIR)
