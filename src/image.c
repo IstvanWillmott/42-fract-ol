@@ -23,7 +23,7 @@ void pixel_draw(t_image *data, int x, int y, int colour)
 
 //#include <stdio.h>
 
-void draw_screen(t_imagewin *imagewin)
+void draw_screen(t_imagewin *imagewin, t_mouse *mouse)
 {
 	//t_image image;
 	int x;
@@ -41,7 +41,7 @@ void draw_screen(t_imagewin *imagewin)
 	{
 		while (y < WIN_HEIGHT)
 		{
-			ret = mandelbrot(x, y);
+			ret = mandelbrot(x, y, mouse);
 			if (ret >= 50)
 				pixel_draw(&imagewin->image, x, y, 0);
 			else if (ret <= 49 && ret > 30)

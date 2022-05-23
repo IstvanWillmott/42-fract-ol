@@ -13,27 +13,30 @@
 #include "fractol.h"
 #include "mlx.h"
 
-t_complex xyto_complex(int x, int y)
+t_complex xyto_complex(int x, int y, t_mouse *mouse)
 {
 	t_complex	p;
 
-	p.r = ((double)x / ((WIN_WIDTH) * 0.26) - 2);
-	p.i = ((double)y / ((-WIN_HEIGHT) * 0.45)+1.1);
+	if (mouse->zoomval < 1)
+		mouse->zoomval = 1;
+	//p.r = (((double)x / ((WIN_WIDTH)*0.26)-2) + mouse->mouse_complex.r) / mouse->zoomval;
+	//p.i = (((double)y / ((-WIN_HEIGHT)*0.45)+1.1) + mouse->mouse_complex.i) / mouse->zoomval;
+	p.r = (((double)x / ((WIN_WIDTH)*0.26)-2));
+	p.i = (((double)y / ((-WIN_HEIGHT)*0.45)+1.1));
 	return (p);
 }
 
-int mandelbrot(int x, int y)
+int mandelbrot(int x, int y, t_mouse *mouse)
 {
 	t_complex z;
 	t_complex c;
 	t_complex temp;
-	//t_viewport v;
 	int max_iteration;
 	int i;
-	max_iteration = 50;
+	max_iteration = 2000;
 	i = 0;
-	z = xyto_complex(x, y);
-	c = xyto_complex(x, y);
+	z = xyto_complex(x, y, mouse);
+	c = xyto_complex(x, y, mouse);
 	while (((z.r * z.r + z.i * z.i) < (4)) && (i < max_iteration))
 	{
 		temp.r = z.r * z.r - z.i * z.i + c.r;

@@ -31,14 +31,6 @@ typedef struct	s_rgba
 	uint8_t	a;
 }	t_rgba;
 
-typedef struct s_mouse
-{
-	char	isdown;
-	int		x;
-	int		y;
-	int		lastx;
-	int		lasty;
-}	t_mouse;
 
 typedef struct s_image
 {
@@ -75,12 +67,22 @@ typedef struct	s_viewport
 	t_complex	mouse;
 }	t_viewport;
 
+typedef struct s_mouse
+{
+	char	isdown;
+	int		x;
+	int		y;
+	int		lastx;
+	int		lasty;
+	double	zoomval;
+	t_complex mouse_complex;
+}	t_mouse;
 
 //typedef struct s_mlx t_mlx;
 
-void 		draw_screen(t_imagewin *imagewin);
-int			mandelbrot(int x, int y);
-t_complex	xyto_complex(int x, int y);
+void 		draw_screen(t_imagewin *imagewin, t_mouse *mouse);
+int			mandelbrot(int x, int y, t_mouse *mouse);
+//t_complex	xyto_complex(int x, int y);
 int 		mouse_hook_init(int keycode, int x, int y, t_mouse *mouse);
 
 #endif
