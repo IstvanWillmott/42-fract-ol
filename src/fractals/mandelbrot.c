@@ -16,13 +16,11 @@
 t_complex xyto_complex(int x, int y, t_mouse *mouse)
 {
 	t_complex	p;
-
-	if (mouse->zoomval < 1)
-		mouse->zoomval = 1;
+	mouse->x = x;
 	//p.r = (((double)x / ((WIN_WIDTH)*0.26)-2) + mouse->mouse_complex.r) / mouse->zoomval;
 	//p.i = (((double)y / ((-WIN_HEIGHT)*0.45)+1.1) + mouse->mouse_complex.i) / mouse->zoomval;
-	p.r = (((double)x / ((WIN_WIDTH)*0.26)-2));
-	p.i = (((double)y / ((-WIN_HEIGHT)*0.45)+1.1));
+	p.r = (((double)x / ((WIN_WIDTH) * 0.26) - 2));
+	p.i = (((double)y / ((WIN_HEIGHT) * 0.45) - 1.1));
 	return (p);
 }
 
@@ -35,12 +33,57 @@ int mandelbrot(int x, int y, t_mouse *mouse)
 	int i;
 	max_iteration = 2000;
 	i = 0;
-	z = xyto_complex(x, y, mouse);
+	z.r = 0;
+	z.i = 0;
 	c = xyto_complex(x, y, mouse);
 	while (((z.r * z.r + z.i * z.i) < (4)) && (i < max_iteration))
 	{
 		temp.r = z.r * z.r - z.i * z.i + c.r;
 		z.i = 2 * z.r * z.i + c.i;
+		z.r = temp.r;
+		i++;
+	}
+	return (i);
+}
+
+int julia(int x, int y, t_mouse *mouse)
+{
+	t_complex z;
+	t_complex c;
+	t_complex temp;
+	int max_iteration;
+	int i;
+	max_iteration = 50;
+	i = 0;
+	z = xyto_complex(x, y, mouse);
+	c.r = 0.28;
+	c.i = 0.008;
+	while (((z.r * z.r + z.i * z.i) < (4)) && (i < max_iteration))
+	{
+		temp.r = z.r * z.r - z.i * z.i + c.r;
+		z.i = 2 * z.r * z.i + c.i;
+		z.r = temp.r;
+		i++;
+	}
+	return (i);
+}
+
+int burning(int x, int y, t_mouse *mouse)
+{
+	t_complex z;
+	t_complex c;
+	t_complex temp;
+	int	max_iteration;
+	int	i;
+
+	max_iteration = 2000;
+	i = 0;
+	z = xyto_complex(x, y, mouse);
+	c = xyto_complex(x, y, mouse);
+	while (((z.r * z.r + z.i * z.i) < (4)) && (i < max_iteration))
+	{
+		temp.r = z.r * z.r - z.i * z.i + c.r;
+		z.i = 2 * fabs(z.r * z.i) + c.i;
 		z.r = temp.r;
 		i++;
 	}

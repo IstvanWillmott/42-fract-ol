@@ -29,31 +29,40 @@ typedef struct s_hold
 	t_imagewin *imagewin;
 }	t_hold;
 
-int render_next_frame(t_hold *hold)
+/*int render_next_frame(t_hold *hold)
 {
-	draw_screen(hold->imagewin, hold->mouse);
+	//draw_screen(hold->imagewin, hold->mouse);
 	return (1);
-}
+}*/
 
-int main(void)
+int main(int argc, char *argv[])
 {
 	t_mouse	mouse;
 	t_imagewin imagewin;
-	t_hold hold;
+	int render;
+	//t_hold hold;
 
+	if (argc == 2)
+	{
+		render = argv[1][0] - 48;
+		if (render > 3 || render < 1)
+			return (0);
+	}
+	else
+		return(0);
 	imagewin.mlx = mlx_init();
 	imagewin.win = mlx_new_window(imagewin.mlx, WIN_WIDTH, WIN_HEIGHT, "Fract'ol");
 	//printf("1\n");
 	mlx_mouse_hook(imagewin.win, mouse_hook_init, &mouse);
 	//printf("2\n");
-	//draw_screen(&imagewin, &mouse);
+	draw_screen(&imagewin, &mouse, render);
 	//printf("3\n");
 	//printf("4\n");
 	mlx_hook(imagewin.win, 2, 1L<<0, end, &imagewin);
-	hold.imagewin = &imagewin;
-	hold.mouse = &mouse;
+	//hold.imagewin = &imagewin;
+	//hold.mouse = &mouse;
 	//printf("5\n");
-	mlx_loop_hook(imagewin.mlx, render_next_frame, &hold);
+	//mlx_loop_hook(imagewin.mlx, render_next_frame, &hold);
 	//printf("6\n");
 	mlx_loop(imagewin.mlx);
 	return (0);

@@ -39,7 +39,6 @@ MLX_LIB	= $(addprefix $(MLX),mlx.a)
 
 # build instructions
 all: obj $(MLX_LIB) $(NAME)
-	./$(NAME)
 
 obj:
 	mkdir -p $(OBJDIR)

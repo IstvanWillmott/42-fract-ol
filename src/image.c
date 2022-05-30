@@ -23,7 +23,7 @@ void pixel_draw(t_image *data, int x, int y, int colour)
 
 //#include <stdio.h>
 
-void draw_screen(t_imagewin *imagewin, t_mouse *mouse)
+void draw_screen(t_imagewin *imagewin, t_mouse *mouse, int render)
 {
 	//t_image image;
 	int x;
@@ -41,17 +41,22 @@ void draw_screen(t_imagewin *imagewin, t_mouse *mouse)
 	{
 		while (y < WIN_HEIGHT)
 		{
-			ret = mandelbrot(x, y, mouse);
+			if (render == 1)
+				ret = mandelbrot(x, y, mouse);
+			if (render == 2)
+				ret = julia(x, y, mouse);
+			if (render == 3)
+				ret = burning(x, y, mouse);
 			if (ret >= 50)
 				pixel_draw(&imagewin->image, x, y, 0);
 			else if (ret <= 49 && ret > 30)
-				pixel_draw(&imagewin->image, x, y, 0x000066FF - ret*40);
+				pixel_draw(&imagewin->image, x, y, 0x000066FF + ret*10);
 			else if (ret <= 30 && ret > 20)
-				pixel_draw(&imagewin->image, x, y, 0x0033CCFF - ret*30);
+				pixel_draw(&imagewin->image, x, y, 0x0033CCFF + ret*10);
 			else if (ret <= 20 && ret > 10)
-				pixel_draw(&imagewin->image, x, y, 0x0099FF33 - ret*20);
+				pixel_draw(&imagewin->image, x, y, 0x0099FF33 + ret*10);
 			else 
-				pixel_draw(&imagewin->image, x, y, 0x00CCFF00 - ret*10);
+				pixel_draw(&imagewin->image, x, y, 0x00CCFF00 + ret*10);
 			y++;
 		}
 		if (y == WIN_HEIGHT)

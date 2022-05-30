@@ -80,8 +80,10 @@ typedef struct s_mouse
 
 //typedef struct s_mlx t_mlx;
 
-void 		draw_screen(t_imagewin *imagewin, t_mouse *mouse);
+void 		draw_screen(t_imagewin *imagewin, t_mouse *mouse, int render);
 int			mandelbrot(int x, int y, t_mouse *mouse);
+int			burning(int x, int y, t_mouse *mouse);
+int			julia(int x, int y, t_mouse *mouse);
 //t_complex	xyto_complex(int x, int y);
 int 		mouse_hook_init(int keycode, int x, int y, t_mouse *mouse);
 
