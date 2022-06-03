@@ -13,7 +13,7 @@
 #include "fractol.h"
 #include "mlx.h"
 
-int end(int keycode, t_imagewin *imagewin)
+int	end(int keycode, t_imagewin *imagewin)
 {
 	if (keycode == 53)
 	{
@@ -23,11 +23,11 @@ int end(int keycode, t_imagewin *imagewin)
 	return (0);
 }
 
-void wrong_input(int inp)
+void	wrong_input(int argc, char *argv[])
 {
-	if (inp == 0)
+	if (argc < 2)
 		write(1, "Input required\n", 16);
-	else if (inp == 1)
+	else if (argv[1][0] < 1 || argv[1][0] > 3)
 		write(1, "Wrong input\n", 13);
 	write(1, "1 - Mandelbrot\n", 16);
 	write(1, "2 - Julia\n", 11);
@@ -35,33 +35,30 @@ void wrong_input(int inp)
 	write(1, "ie: ./fractol 1\n", 17);
 	exit (0);
 }
-int render_next_frame(t_hold *hold)
+
+int	render_next_frame(t_hold *hold)
 {
 	draw_screen(hold->imagewin, hold->mouse, hold->render);
 	return (1);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	t_mouse	mouse;
-	t_imagewin imagewin;
-	int render;
-	t_hold hold;
+	t_mouse		mouse;
+	t_imagewin	imagewin;
+	int			render;
+	t_hold		hold;
 
 	render = 0;
-	if (argc == 2 || argc == 3)
-	{
+	if ((argc == 2) && (argv[1][0] > 48) && (argv[1][0] < 52))
 		render = argv[1][0] - 48;
-		if (render > 3 || render < 1)
-			wrong_input(1);
-	}
 	else
-		wrong_input(0);
+		wrong_input(argc, argv);
 	imagewin.mlx = mlx_init();
-	imagewin.win = mlx_new_window(imagewin.mlx, WIN_WIDTH, WIN_HEIGHT, "Fract'ol");
+	imagewin.win = mlx_new_window(imagewin.mlx,
+			WIN_WIDTH, WIN_HEIGHT, "Fract'ol");
 	mlx_mouse_hook(imagewin.win, mouse_hook_init, &mouse);
-	//draw_screen(&imagewin, &mouse, render);
-	mlx_hook(imagewin.win, 2, 1L<<0, end, &imagewin);
+	mlx_hook(imagewin.win, 2, 1L << 0, end, &imagewin);
 	hold.imagewin = &imagewin;
 	hold.mouse = &mouse;
 	mouse.zoomval = 1;

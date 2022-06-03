@@ -13,29 +13,23 @@
 #include "fractol.h"
 #include "mlx.h"
 
-#include <stdio.h>
-t_complex xyto_complex(int x, int y, t_mouse *mouse)
+t_complex	xyto_complex(int x, int y, t_mouse *mouse)
 {
 	t_complex	p;
-	mouse->x = x;
-	//p.r = (((double)x / ((WIN_WIDTH)*0.26)-2) + mouse->mouse_complex.r) / mouse->zoomval;
-	//p.i = (((double)y / ((WIN_HEIGHT)*0.45)+1.1) + mouse->mouse_complex.i) / mouse->zoomval;
-	//p.r = (((double)x / ((WIN_WIDTH) * 0.26) - 2));
-	//p.i = (((double)y / ((WIN_HEIGHT) * 0.45) - 1.1));
-	//p.r /= mouse->zoomval;
-	//p.i /= mouse->zoomval;
+
 	p.r = (((double)x / ((WIN_WIDTH) * 0.26) - 2)) / mouse->zoomval;
 	p.i = (((double)y / ((WIN_HEIGHT) * 0.45) - 1.1)) / mouse->zoomval;
 	return (p);
 }
 
-int mandelbrot(int x, int y, t_mouse *mouse)
+int	mandelbrot(int x, int y, t_mouse *mouse)
 {
-	t_complex z;
-	t_complex c;
-	t_complex temp;
-	int max_iteration;
-	int i;
+	t_complex	z;
+	t_complex	c;
+	t_complex	temp;
+	int			max_iteration;
+	int			i;
+
 	max_iteration = 2000;
 	i = 0;
 	z.r = 0;
@@ -51,13 +45,14 @@ int mandelbrot(int x, int y, t_mouse *mouse)
 	return (i);
 }
 
-int julia(int x, int y, t_mouse *mouse)
+int	julia(int x, int y, t_mouse *mouse)
 {
-	t_complex z;
-	t_complex c;
-	t_complex temp;
-	int max_iteration;
-	int i;
+	t_complex	z;
+	t_complex	c;
+	t_complex	temp;
+	int			max_iteration;
+	int			i;
+
 	max_iteration = 2000;
 	i = 0;
 	z = xyto_complex(x, y, mouse);
@@ -73,13 +68,13 @@ int julia(int x, int y, t_mouse *mouse)
 	return (i);
 }
 
-int burning(int x, int y, t_mouse *mouse)
+int	burning(int x, int y, t_mouse *mouse)
 {
-	t_complex z;
-	t_complex c;
-	t_complex temp;
-	int	max_iteration;
-	int	i;
+	t_complex	z;
+	t_complex	c;
+	t_complex	temp;
+	int			max_iteration;
+	int			i;
 
 	max_iteration = 2000;
 	i = 0;
