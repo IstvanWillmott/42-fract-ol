@@ -25,8 +25,6 @@ int	mouse_hook_init(int keycode, int x, int y, t_mouse *mouse)
 	mouse->isdown = keycode;
 	if (mouse->isdown == 4)
 	{
-		mouse->lastx = mouse->x;
-		mouse->lasty = mouse->y;
 		mouse->x = x;
 		mouse->y = y;
 		mouse->zoomval += 1;

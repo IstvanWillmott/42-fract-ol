@@ -38,7 +38,11 @@ void	wrong_input(int argc, char *argv[])
 
 int	render_next_frame(t_hold *hold)
 {
-	draw_screen(hold->imagewin, hold->mouse, hold->render);
+	if (hold->mouse->isdown == 4)
+	{
+		draw_screen(hold->imagewin, hold->mouse, hold->render);
+		hold->mouse->isdown = 0;
+	}
 	return (1);
 }
 
