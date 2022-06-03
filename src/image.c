@@ -21,20 +21,18 @@ void pixel_draw(t_image *data, int x, int y, int colour)
 	*(unsigned int*)dst = colour;
 }
 
-//#include <stdio.h>
-
 void draw_screen(t_imagewin *imagewin, t_mouse *mouse, int render)
 {
 	//t_image image;
 	int x;
 	int y;
 	int ret;
-	int divider;
+	double times;
 
 	x = 0;
 	y = 0;
 	ret = 0;
-	divider = 5;
+	times = 0;
 	imagewin->image.image = mlx_new_image(imagewin->mlx, WIN_WIDTH, WIN_HEIGHT);
 	imagewin->image.ptr = mlx_get_data_addr(imagewin->image.image, &imagewin->image.bits_per_pixel, &imagewin->image.stride, &imagewin->image.endian);
 	while (x < WIN_WIDTH)
@@ -47,16 +45,11 @@ void draw_screen(t_imagewin *imagewin, t_mouse *mouse, int render)
 				ret = julia(x, y, mouse);
 			if (render == 3)
 				ret = burning(x, y, mouse);
+			times = (ret * ret)/10;
 			if (ret >= 50)
 				pixel_draw(&imagewin->image, x, y, 0);
-			else if (ret <= 49 && ret > 30)
-				pixel_draw(&imagewin->image, x, y, 0x000066FF + ret*10);
-			else if (ret <= 30 && ret > 20)
-				pixel_draw(&imagewin->image, x, y, 0x0033CCFF + ret*10);
-			else if (ret <= 20 && ret > 10)
-				pixel_draw(&imagewin->image, x, y, 0x0099FF33 + ret*10);
-			else 
-				pixel_draw(&imagewin->image, x, y, 0x00CCFF00 + ret*10);
+			else
+				pixel_draw(&imagewin->image, x, y, (unsigned int) 16777215-(times*10000));
 			y++;
 		}
 		if (y == WIN_HEIGHT)

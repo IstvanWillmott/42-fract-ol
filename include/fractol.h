@@ -17,20 +17,12 @@
 # include <pthread.h>
 # include <math.h>
 # include <stdlib.h>
+# include <unistd.h>
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
 # define ZOOM 0
 # define THREADS 8
-
-typedef struct	s_rgba
-{
-	uint8_t	r;
-	uint8_t	g;
-	uint8_t	b;
-	uint8_t	a;
-}	t_rgba;
-
 
 typedef struct s_image
 {
@@ -77,6 +69,13 @@ typedef struct s_mouse
 	double	zoomval;
 	t_complex mouse_complex;
 }	t_mouse;
+
+typedef struct s_hold
+{
+	t_mouse	*mouse;
+	t_imagewin *imagewin;
+	int render;
+}	t_hold;
 
 //typedef struct s_mlx t_mlx;
 

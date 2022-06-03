@@ -23,47 +23,50 @@ int end(int keycode, t_imagewin *imagewin)
 	return (0);
 }
 
-typedef struct s_hold
+void wrong_input(int inp)
 {
-	t_mouse	*mouse;
-	t_imagewin *imagewin;
-}	t_hold;
-
-/*int render_next_frame(t_hold *hold)
+	if (inp == 0)
+		write(1, "Input required\n", 16);
+	else if (inp == 1)
+		write(1, "Wrong input\n", 13);
+	write(1, "1 - Mandelbrot\n", 16);
+	write(1, "2 - Julia\n", 11);
+	write(1, "3 - Burning Ship\n", 18);
+	write(1, "ie: ./fractol 1\n", 17);
+	exit (0);
+}
+int render_next_frame(t_hold *hold)
 {
-	//draw_screen(hold->imagewin, hold->mouse);
+	draw_screen(hold->imagewin, hold->mouse, hold->render);
 	return (1);
-}*/
+}
 
 int main(int argc, char *argv[])
 {
 	t_mouse	mouse;
 	t_imagewin imagewin;
 	int render;
-	//t_hold hold;
+	t_hold hold;
 
-	if (argc == 2)
+	render = 0;
+	if (argc == 2 || argc == 3)
 	{
 		render = argv[1][0] - 48;
 		if (render > 3 || render < 1)
-			return (0);
+			wrong_input(1);
 	}
 	else
-		return(0);
+		wrong_input(0);
 	imagewin.mlx = mlx_init();
 	imagewin.win = mlx_new_window(imagewin.mlx, WIN_WIDTH, WIN_HEIGHT, "Fract'ol");
-	//printf("1\n");
 	mlx_mouse_hook(imagewin.win, mouse_hook_init, &mouse);
-	//printf("2\n");
-	draw_screen(&imagewin, &mouse, render);
-	//printf("3\n");
-	//printf("4\n");
+	//draw_screen(&imagewin, &mouse, render);
 	mlx_hook(imagewin.win, 2, 1L<<0, end, &imagewin);
-	//hold.imagewin = &imagewin;
-	//hold.mouse = &mouse;
-	//printf("5\n");
-	//mlx_loop_hook(imagewin.mlx, render_next_frame, &hold);
-	//printf("6\n");
+	hold.imagewin = &imagewin;
+	hold.mouse = &mouse;
+	mouse.zoomval = 1;
+	hold.render = render;
+	mlx_loop_hook(imagewin.mlx, render_next_frame, &hold);
 	mlx_loop(imagewin.mlx);
 	return (0);
 }
