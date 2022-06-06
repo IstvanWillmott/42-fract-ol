@@ -29,6 +29,12 @@ int	mouse_hook_init(int keycode, int x, int y, t_mouse *mouse)
 		mouse->y = y;
 		mouse->zoomval += 1;
 	}
+	if (mouse->isdown == 5)
+	{
+		mouse->x = x;
+		mouse->y = y;
+		mouse->zoomval -= 1;
+	}
 	mouse_complex(mouse);
 	return (0);
 }

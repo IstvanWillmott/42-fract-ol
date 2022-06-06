@@ -68,6 +68,29 @@ int	julia(int x, int y, t_mouse *mouse)
 	return (i);
 }
 
+int	julia2(int x, int y, t_mouse *mouse)
+{
+	t_complex	z;
+	t_complex	c;
+	t_complex	temp;
+	int			max_iteration;
+	int			i;
+
+	max_iteration = 2000;
+	i = 0;
+	z = xyto_complex(x, y, mouse);
+	c.r = -0.79;
+	c.i = 0.15;
+	while (((z.r * z.r + z.i * z.i) < (4)) && (i < max_iteration))
+	{
+		temp.r = z.r * z.r - z.i * z.i + c.r;
+		z.i = 2 * z.r * z.i + c.i;
+		z.r = temp.r;
+		i++;
+	}
+	return (i);
+}
+
 int	burning(int x, int y, t_mouse *mouse)
 {
 	t_complex	z;

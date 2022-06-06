@@ -21,8 +21,6 @@
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
-# define ZOOM 0
-# define THREADS 8
 
 typedef struct s_image
 {
@@ -83,7 +81,7 @@ void 		draw_screen(t_imagewin *imagewin, t_mouse *mouse, int render);
 int			mandelbrot(int x, int y, t_mouse *mouse);
 int			burning(int x, int y, t_mouse *mouse);
 int			julia(int x, int y, t_mouse *mouse);
-//t_complex	xyto_complex(int x, int y);
+int			julia2(int x, int y, t_mouse *mouse);
 int 		mouse_hook_init(int keycode, int x, int y, t_mouse *mouse);
 
 #endif

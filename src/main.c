@@ -27,18 +27,19 @@ void	wrong_input(int argc, char *argv[])
 {
 	if (argc < 2)
 		write(1, "Input required\n", 16);
-	else if (argv[1][0] < 1 || argv[1][0] > 3)
+	else if (argv[1][0] < 1 || argv[1][0] > 4)
 		write(1, "Wrong input\n", 13);
 	write(1, "1 - Mandelbrot\n", 16);
 	write(1, "2 - Julia\n", 11);
-	write(1, "3 - Burning Ship\n", 18);
+	write(1, "3 - Julia2\n", 11);
+	write(1, "4 - Burning Ship\n", 18);
 	write(1, "ie: ./fractol 1\n", 17);
 	exit (0);
 }
 
 int	render_next_frame(t_hold *hold)
 {
-	if (hold->mouse->isdown == 4)
+	if (hold->mouse->isdown == 4 || hold->mouse->isdown == 5)
 	{
 		draw_screen(hold->imagewin, hold->mouse, hold->render);
 		hold->mouse->isdown = 0;
@@ -66,6 +67,7 @@ int	main(int argc, char *argv[])
 	hold.imagewin = &imagewin;
 	hold.mouse = &mouse;
 	mouse.zoomval = 1;
+	mouse.isdown = 4;
 	hold.render = render;
 	mlx_loop_hook(imagewin.mlx, render_next_frame, &hold);
 	mlx_loop(imagewin.mlx);
